@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Polynomials</title>
+    <link rel="stylesheet" href="style/elements.css">
+    <link rel="stylesheet" href="style/index.css">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/polynomial.min.js"></script>
+    <script src="js/poly.js"></script>
+</head>
+
+<body>
+    <div id="nav-placeholder">
+    </div>
+
+    <div class="app-container">
+        <label class="body-text">Polynomial:</label>
+        <input type="text" name="expression" id="expr-box">
+        <label>&#x25B6</label>
+
+        <label class="body-text">Value of variable:</label>
+        <input type="text" name="variable" id="var-box">
+        <div id="poly">
+            <label class="body-text" id="horner-scheme"></label>
+            <br>
+            <label class="body-text" id="result"></label>
+            <canvas id="graph-canvas"></canvas>
+        </div>
+    </div>
+</body>
+
+</html>

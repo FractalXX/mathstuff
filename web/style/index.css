@@ -1,0 +1,43 @@
+label {
+    user-select: none;
+}
+
+#expr-box {
+    width: 200px;
+    height: 30px;
+    margin-left: 10px;
+    padding: 2px;
+    padding-right: 40px;
+    font-size: 18px;
+    transition: ease-in-out, width .35s ease-in-out;
+}
+
+#expr-box:focus {
+    width: 400px;
+}
+
+#expr-box + label {
+    color: white;
+    margin-left: -40px;
+    margin-right: 40px;
+}
+
+#var-box {
+    width: 50px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+#poly {
+    margin-top: 40px;
+}
+
+#graph-canvas {
+    display: block;
+    background-color: black;
+    border: 1px solid white;
+    margin-top: 20px;
+    width: 640px;
+    height: 480px;
+}
