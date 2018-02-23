@@ -15,6 +15,7 @@ function onLoad() {
     document.getElementById("var-box").addEventListener("keyup", updateExpression, true);
 
     canvas = document.getElementById("graph-canvas");
+    
     canvas.addEventListener("mousedown", function(e) {
         mousedown = true;
         getValueFromPlot(e); 
@@ -28,6 +29,7 @@ function onLoad() {
         mousedown = false;
         getValueFromPlot(e); 
     }, true);
+
     canvas.width = 640;
     canvas.height = 480;
     ctx = canvas.getContext('2d');
@@ -73,10 +75,10 @@ function drawCoordGrid() {
 
 function redrawCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+   
     drawCoordSystem();
     if(polynomial !== undefined) {
-        plotFunction(-50, 50, scale, 0.1);
+        plotFunction(-50, 50, 0.1);
         ctx.fillRect(variable * scale + canvas.width / 2 - 2.5, -polynomial.eval(variable) * scale + canvas.height / 2 - 2.5, 5, 5);
     }
 }
@@ -97,7 +99,7 @@ function getValueFromPlot(e) {
     updateExpression();
 }
 
-function plotFunction(min, max, scale, increment) {
+function plotFunction(min, max, increment) {
     ctx.beginPath();
     ctx.lineWidth = 1;
     for(var x = min; x < max; x += increment) {
