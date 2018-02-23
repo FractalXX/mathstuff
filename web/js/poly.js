@@ -14,6 +14,19 @@ function onLoad() {
     document.getElementById("expr-box").addEventListener("keyup", updateExpression, true);
     document.getElementById("var-box").addEventListener("keyup", updateExpression, true);
 
+    var plotScale = document.getElementById("plot-scale");
+    plotScale.addEventListener("keyup", updateExpression, true);
+
+    document.getElementById("inc-scale").addEventListener("click", function() {
+        plotScale.value = parseFloat(plotScale.value) + 1;
+        updateExpression();
+    }, false);
+
+    document.getElementById("dec-scale").addEventListener("click", function() {
+        plotScale.value = parseFloat(plotScale.value) - 1;
+        updateExpression();
+    }, false);
+
     canvas = document.getElementById("graph-canvas");
     
     canvas.addEventListener("mousedown", function(e) {
@@ -86,8 +99,14 @@ function redrawCanvas() {
 }
 
 function updateExpression() {
+    scale = parseFloat(document.getElementById("plot-scale").value);
+    if(scale < 5) {
+        scale = 5;
+    }
+
     polynomial = new Polynomial(document.getElementById("expr-box").value);
     variable = parseFloat(document.getElementById("var-box").value);
+
     var value = polynomial.eval(variable);
     if(value !== undefined && !isNaN(variable)) {
         document.getElementById("result").innerText = "Value of polynomial at " + variable + ": " + value;

@@ -41,3 +41,12 @@ label {
     width: 640px;
     height: 480px;
 }
+
+#scale {
+    margin-top: 20px;
+}
+
+#plot-scale {
+    width: 80px;
+    height: 20px;
+}
