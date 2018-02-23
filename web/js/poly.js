@@ -33,7 +33,6 @@ function onLoad() {
     canvas.width = 640;
     canvas.height = 480;
     ctx = canvas.getContext('2d');
-    ctx.fillStyle = "#00FFFF";
 
     scale = 20;
 
@@ -79,16 +78,20 @@ function redrawCanvas() {
     drawCoordSystem();
     if(polynomial !== undefined) {
         plotFunction(-50, 50, 0.1);
+        ctx.fillStyle = "#00FFFF";
         ctx.fillRect(variable * scale + canvas.width / 2 - 2.5, -polynomial.eval(variable) * scale + canvas.height / 2 - 2.5, 5, 5);
+        ctx.fillStyle = "#FFFF00";
+        ctx.fillRect(variable * scale + canvas.width / 2, canvas.height / 2 - 10, 1, 20);
     }
 }
 
 function updateExpression() {
     polynomial = new Polynomial(document.getElementById("expr-box").value);
     variable = parseFloat(document.getElementById("var-box").value);
-    document.getElementById("horner-scheme").innerText = "Horner Scheme format: " + polynomial.toHorner();
-    if(variable !== undefined && !isNaN(variable)) {
-        document.getElementById("result").innerText = "Value of polynomial at " + variable + ": " + polynomial.eval(variable);
+    var value = polynomial.eval(variable);
+    if(value !== undefined && !isNaN(variable)) {
+        document.getElementById("result").innerText = "Value of polynomial at " + variable + ": " + value;
+        document.getElementById("horner-scheme").innerText = "Horner Scheme format: " + polynomial.toHorner();
     }
     redrawCanvas();
 }
