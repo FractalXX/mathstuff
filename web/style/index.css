@@ -33,6 +33,12 @@ label {
     margin-top: 40px;
 }
 
+#canvas-div {
+    overflow: hidden;
+    width: 640px;
+    height: 480px;
+}
+
 #graph-canvas {
     display: block;
     background-color: black;
@@ -40,6 +46,7 @@ label {
     margin-top: 20px;
     width: 640px;
     height: 480px;
+    cursor: crosshair;
 }
 
 #scale {

@@ -6,6 +6,9 @@ var variable;
 var canvas;
 var ctx;
 
+var canvasBaseWidth = 600;
+var canvasBaseHeight = 480;
+
 var scale;
 
 var mousedown;
@@ -43,11 +46,11 @@ function onLoad() {
         getValueFromPlot(e); 
     }, true);
 
-    canvas.width = 640;
-    canvas.height = 480;
+    canvas.width = canvasBaseWidth;
+    canvas.height = canvasBaseHeight;
     ctx = canvas.getContext('2d');
 
-    scale = 20;
+    scale = 5;
 
     mousedown = false;
 
@@ -71,12 +74,22 @@ function drawCoordGrid() {
     ctx.beginPath();
     ctx.lineWidth = 1;
 
-    for(var x = 0; x < canvas.width; x += scale) {
+    for(var x = canvas.width / 2; x < canvas.width; x += scale) {
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);       
+        ctx.lineTo(x, canvas.height);
     }
 
-    for(var y = 0; y < canvas.height; y += scale) {
+    for(var x = canvas.width / 2; x > 0; x -= scale) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+    }
+
+    for(var y = canvas.height / 2; y < canvas.height; y += scale) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);       
+    }
+
+    for(var y = canvas.height / 2; y > 0; y -= scale) {
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);       
     }
