@@ -1,0 +1,58 @@
+#number-line {
+    height: 50px;
+    width: 400px;
+}
+
+#settings {
+    width: 400px;
+}
+
+#result {
+    width: calc(100%-40px);
+    text-align: center;
+}
+
+#top-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+#title {
+    font-size: 92px;
+}
+
+#exp-fr {
+    width: 100%;
+}
+
+.content input[type="checkbox"],
+.content input[type="text"],
+.content input[type="number"] {
+    float: right;
+}
+
+#number-text,
+#base-text {
+    width: 100px;
+}
+
+#number-input {
+    width: 400px;
+}
+
+.bit {
+    display: inline-block;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+    padding: 5px;
+}
+
+#binary-point {
+    font-size: 24px;
+    color: white;
+}

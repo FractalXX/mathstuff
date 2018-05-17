@@ -20,30 +20,30 @@ function onLoad() {
     var plotScale = document.getElementById("plot-scale");
     plotScale.addEventListener("keyup", updateExpression, true);
 
-    document.getElementById("inc-scale").addEventListener("click", function() {
+    document.getElementById("inc-scale").addEventListener("click", function () {
         plotScale.value = parseFloat(plotScale.value) + 1;
         updateExpression();
     }, false);
 
-    document.getElementById("dec-scale").addEventListener("click", function() {
+    document.getElementById("dec-scale").addEventListener("click", function () {
         plotScale.value = parseFloat(plotScale.value) - 1;
         updateExpression();
     }, false);
 
     canvas = document.getElementById("graph-canvas");
-    
-    canvas.addEventListener("mousedown", function(e) {
+
+    canvas.addEventListener("mousedown", function (e) {
         mousedown = true;
-        getValueFromPlot(e); 
+        getValueFromPlot(e);
     }, true);
-    canvas.addEventListener("mousemove", function(e) {
-        if(mousedown) {
-            getValueFromPlot(e); 
+    canvas.addEventListener("mousemove", function (e) {
+        if (mousedown) {
+            getValueFromPlot(e);
         }
     }, true);
-    canvas.addEventListener("mouseup", function(e) {
+    canvas.addEventListener("mouseup", function (e) {
         mousedown = false;
-        getValueFromPlot(e); 
+        getValueFromPlot(e);
     }, true);
 
     canvas.width = canvasBaseWidth;
@@ -74,24 +74,24 @@ function drawCoordGrid() {
     ctx.beginPath();
     ctx.lineWidth = 1;
 
-    for(var x = canvas.width / 2; x < canvas.width; x += scale) {
+    for (var x = canvas.width / 2; x < canvas.width; x += scale) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
     }
 
-    for(var x = canvas.width / 2; x > 0; x -= scale) {
+    for (var x = canvas.width / 2; x > 0; x -= scale) {
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
     }
 
-    for(var y = canvas.height / 2; y < canvas.height; y += scale) {
+    for (var y = canvas.height / 2; y < canvas.height; y += scale) {
         ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);       
+        ctx.lineTo(canvas.width, y);
     }
 
-    for(var y = canvas.height / 2; y > 0; y -= scale) {
+    for (var y = canvas.height / 2; y > 0; y -= scale) {
         ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);       
+        ctx.lineTo(canvas.width, y);
     }
 
     ctx.strokeStyle = "#AAAAAA";
@@ -100,9 +100,9 @@ function drawCoordGrid() {
 
 function redrawCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-   
+
     drawCoordSystem();
-    if(polynomial !== undefined) {
+    if (polynomial !== undefined) {
         plotFunction(-50, 50, 0.1);
         ctx.fillStyle = "#00FFFF";
         ctx.fillRect(variable * scale + canvas.width / 2 - 2.5, -polynomial.eval(variable) * scale + canvas.height / 2 - 2.5, 5, 5);
@@ -113,7 +113,7 @@ function redrawCanvas() {
 
 function updateExpression() {
     scale = parseFloat(document.getElementById("plot-scale").value);
-    if(scale < 5) {
+    if (scale < 5) {
         scale = 5;
     }
 
@@ -121,7 +121,7 @@ function updateExpression() {
     variable = parseFloat(document.getElementById("var-box").value);
 
     var value = polynomial.eval(variable);
-    if(value !== undefined && !isNaN(variable)) {
+    if (value !== undefined && !isNaN(variable)) {
         document.getElementById("result").innerText = "Value of polynomial at " + variable + ": " + value;
         document.getElementById("horner-scheme").innerText = "Horner Scheme format: " + polynomial.toHorner();
     }
@@ -137,9 +137,9 @@ function getValueFromPlot(e) {
 function plotFunction(min, max, increment) {
     ctx.beginPath();
     ctx.lineWidth = 1;
-    for(var x = min; x < max; x += increment) {
-        ctx.moveTo(x*scale+canvas.width/2, -polynomial.eval(x)*scale+canvas.height/2);
-        ctx.lineTo((x+increment)*scale+canvas.width/2, -polynomial.eval(x+increment)*scale+canvas.height/2);    
+    for (var x = min; x < max; x += increment) {
+        ctx.moveTo(x * scale + canvas.width / 2, -polynomial.eval(x) * scale + canvas.height / 2);
+        ctx.lineTo((x + increment) * scale + canvas.width / 2, -polynomial.eval(x + increment) * scale + canvas.height / 2);
     }
     ctx.strokeStyle = "#00FF00";
     ctx.stroke();

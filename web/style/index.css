@@ -16,7 +16,7 @@ label {
     width: 400px;
 }
 
-#expr-box + label {
+#expr-box+label {
     color: white;
     margin-left: -40px;
     margin-right: 40px;
@@ -35,8 +35,6 @@ label {
 
 #graph-canvas {
     display: block;
-    background-color: black;
-    border: 1px solid white;
     margin-top: 20px;
     width: 640px;
     height: 480px;

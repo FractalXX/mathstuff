@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Floating-point numbers</title>
+    <link rel="stylesheet" href="style/repr.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/repr.js"></script>
+</head>
+
+<body>
+    <div id="nav-placeholder">
+    </div>
+
+    <div class="app-container">
+        <div id="top-flex">
+            <section id="number-input">
+                <div class="header">
+                    <label>Input</label>
+                </div>
+                <div class="content">
+                    <div>
+                        <label>Input number:</label>
+                        <input type="number" name="number" id="number-text" />
+                    </div>
+                </div>
+            </section>
+            <div>
+                <label id="title">IEEE 754</label>
+            </div>
+            <section id="settings">
+                <div class="header">
+                    <label>Settings</label>
+                </div>
+                <div class="content">
+                    <div>
+                        <label>Signed:</label>
+                        <input type="checkbox" name="signed" id="signed-box" />
+                    </div>
+                    <div>
+                        <label>Translate exponent:</label>
+                        <input type="checkbox" name="translate" id="translate-box" />
+                    </div>
+                    <br>
+                    <label>Number of bits:</label>
+                    <br>
+                    <label>8</label>
+                    <input type="radio" id="eight" name="bits" value="8" checked>
+                    <label>16</label>
+                    <input type="radio" id="sixteen" name="bits" value="16">
+                    <label>32</label>
+                    <input type="radio" id="thirteen" name="bits" value="32">
+                    <div>
+                        <label style="float: left;">Exponent</label>
+                        <label style="float: right;">Fraction</label>
+                        <br>
+                        <input type="range" id="exp-fr" name="exp-fr" min="0" max="16" value="4">
+                        <br>
+                        <label id="exp-label" style="float: left;">4</label>
+                        <label id="fra-label" style="float: right;">4</label>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section id="result">
+            <div class="header">
+                <label>Result</label>
+            </div>
+            <div class="content" id="result-div">
+
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
