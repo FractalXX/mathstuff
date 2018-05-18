@@ -50,7 +50,7 @@ function onLoad() {
     canvas.height = canvasBaseHeight;
     ctx = canvas.getContext('2d');
 
-    scale = 5;
+    scale = 20;
 
     mousedown = false;
 
@@ -117,7 +117,10 @@ function updateExpression() {
         scale = 5;
     }
 
-    polynomial = new Polynomial(document.getElementById("expr-box").value);
+    let poly = document.getElementById('expr-box').value;
+    poly = poly.replace(/\s+/g, '');
+
+    polynomial = new Polynomial(poly);
     variable = parseFloat(document.getElementById("var-box").value);
 
     var value = polynomial.eval(variable);

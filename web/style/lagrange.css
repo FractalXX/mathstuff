@@ -10,3 +10,8 @@
 #graph-canvas {
     cursor: crosshair;
 }
+
+#scale {
+    text-align: center;
+    margin-top: -20px;
+}
