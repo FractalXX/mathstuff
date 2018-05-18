@@ -6,7 +6,7 @@ let fractionBits = 4;
 
 let input = 0;
 let exponent = '';
-let fraction = '';
+let mantissa = '';
 
 let signed = false;
 let translateExponent = false;
@@ -16,12 +16,13 @@ function onLoad() {
 
     $('input[name="bits"]').change(function () {
         numBits = $(this).val();
+        document.getElementById('exp-fr').max = numBits;
         update();
     });
 
     $('input[name="exp-fr"]').change(function () {
-        exponentBits = numBits - $(this).val();
-        fractionBits = $(this).val();
+        exponentBits = $(this).val();
+        fractionBits = numBits - $(this).val();
         update();
     });
 
@@ -70,12 +71,6 @@ function updateBits() {
 }
 
 function update() {
-    document.getElementById('exp-fr').max = numBits;
-    if (document.getElementById('exp-fr').value > numBits) {
-        document.getElementById('exp-fr').value = numBits;
-        exponentBits = 0;
-        fractionBits = numBits;
-    }
 
     updateBits();
     convert();
@@ -85,7 +80,8 @@ function update() {
         if (i == 0 && signed) {
             element.innerHTML = input > 0 ? 0 : 1;
         } else {
-            element.innerHTML = exponent[i] ? exponent[i] : fraction[i - exponent.length];
+            let offset = signed ? 1 : 0;
+            element.innerHTML = exponent[i - offset] ? exponent[i - offset] : mantissa[i - exponent.length - offset];
         }
         i++;
     });
@@ -96,7 +92,7 @@ function update() {
 
 function convert() {
     exponent = '';
-    fraction = '';
+    mantissa = '';
     let buffer = Math.trunc(input);
     for (let i = 0; i < exponentBits; i++) {
         if (Math.abs(buffer / 2) > 0) {
@@ -107,46 +103,38 @@ function convert() {
         }
     }
 
-    if (translateExponent) {
-        let translationBase = Math.pow(2, exponentBits) - 1;
-        let trimmed = trimLeadingZeros(exponent);
-        let offset = trimmed.length - 1;
-        // convert translated (with the method)
-    }
-
     buffer = Math.abs(input) - Math.trunc(Math.abs(input));
 
-    for (let i = 0; i < fractionBits; i++) {
-        buffer *= 2;
-        if (buffer > 0) {
-            fraction += Math.trunc(buffer);
+    for (let i = 0; i < 32; i++) {
+        if (i < fractionBits) {
+            buffer *= 2;
+            if (buffer > 0) {
+                mantissa += Math.trunc(buffer);
+            } else {
+                mantissa += 0;
+            }
+            if (buffer >= 1) {
+                buffer -= 1;
+            }
         } else {
-            fraction += 0;
-        }
-        if (buffer >= 1) {
-            buffer -= 1;
+            mantissa += '0';
         }
     }
 
     exponent = exponent.split('').reverse().join('');
+
+    if (translateExponent) {
+        let trimmed = trimLeadingZeros(exponent);
+        let offset = trimmed.length - 1;
+        exponent = ((127 + offset) >>> 0).toString(2);
+        mantissa = trimmed.substring(1, trimmed.length) + mantissa;
+    }
 }
 
 function trimLeadingZeros(number) {
     let i = 0;
-    while (number[i] != '1') {
+    while (number[i] != '1' && i < number.length) {
         i++;
     }
-    return number.substring(i, number.length - 1);
-}
-
-function decToBin(number) {
-    let buffer = Math.trunc(number);
-    for (let i = 0; i < exponentBits; i++) {
-        if (Math.abs(buffer / 2) > 0) {
-            exponent += Math.abs(Math.trunc((buffer % 2))).toString();
-            buffer = buffer / 2;
-        } else {
-            exponent += '0';
-        }
-    }
+    return number.substring(i, number.length);
 }

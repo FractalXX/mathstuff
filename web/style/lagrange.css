@@ -1,0 +1,12 @@
+#top-flex {
+    display: flex;
+    justify-content: center;
+}
+
+#result {
+    width: 400px;
+}
+
+#graph-canvas {
+    cursor: crosshair;
+}
