@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>LP Models</title>
+    <link rel="stylesheet" href="style/lpmodel.css">
+
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/jsep.min.js"></script>
+    <script src="js/lpmodel.js"></script>
+</head>
+
+<body>
+    <div id="nav-placeholder">
+    </div>
+
+    <div class="app-container">
+        <div class="input">
+            <label class="body-text">Enter a constraint:</label>
+            <input type="text" name="constraint" class="expr-box" id="constraint-box">
+
+            <input type="button" id="add-button" value="Add">
+
+            <br>
+
+            <label class="body-text">Objective function:</label>
+            <input type="text" name="function" class="expr-box" id="function-box">
+
+            <ul class="fixed-listview" id="constraints">
+                
+            </ul>
+        </div>
+        <div class="graph-container">
+            <canvas id="graph-canvas"></canvas>
+        </div>
+    </div>
+</body>
+
+</html>

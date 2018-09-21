@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.16.0"
+    "express": "^4.16.0",
+    "jsep": "^0.3.4",
+    "jslint": "^0.12.0"
   },
   "devDependencies": {},
   "scripts": {
